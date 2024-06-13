@@ -9,7 +9,7 @@ error_type,
 HTTP_REFERER,
 session,
 phpversion
-FROM buto_se_db_1.errorlog_log 
+FROM errorlog_log 
 where HTTP_HOST <> 'localhost'
 order by created_at desc
 limit 200

@@ -20,7 +20,7 @@ db_list:
     REQUEST_METHOD,
     QUERY_STRING,
     session_id
-    FROM buto_se_db_1.errorlog_log 
+    FROM errorlog_log 
     where HTTP_HOST <> 'localhost'
     and created_at > DATE_ADD(now(), INTERVAL -30 DAY)
     order by created_at desc

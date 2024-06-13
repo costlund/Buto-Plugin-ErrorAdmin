@@ -1,0 +1,53 @@
+type: widget
+data:
+  plugin: chart/amcharts_v3
+  method: serial
+  data:
+    chart:
+      id: chart_task_minutes_time
+      style: 'width: 100%; height:400px;'
+      data:
+        type: serial
+        theme: none
+        legend:
+          useGraphSettings: true
+        dataProvider: rs:dataProvider
+          # -
+          #   error_date: '2001-01-01'
+          #   error_count: 444
+          #   error_count_error: 333
+        synchronizeGrid: true
+        valueAxes:
+          -
+            id: v1
+            position: left
+        graphs:
+          -
+            valueAxis: v1
+            lineColor: "blue"
+            bullet: round
+            bulletBorderThickness: 1
+            hideBulletsCount: 30
+            title: All
+            valueField: error_count
+            fillAlphas: 0
+          -
+            valueAxis: v1
+            lineColor: "red"
+            bullet: round
+            bulletBorderThickness: 1
+            hideBulletsCount: 30
+            title: Critical
+            valueField: error_count_error
+            fillAlphas: 0
+        chartScrollbar: {}
+        chartCursor:
+          cursorPosition: mouse
+        categoryField: error_date
+        categoryAxis:
+          parseDates: true
+          axisColor: "#DADADA"
+          minorGridEnabled: true
+        export:
+          enabled: true
+          position: bottom-right

@@ -1,0 +1,333 @@
+-
+  type: widget
+  data:
+    plugin: json/bind
+    method: include
+-
+  type: widget
+  data:
+    plugin: 'wf/embed'
+    method: embed
+    data:
+      type: script
+      file: '/plugin/error/admin/js/PluginErrorAdmin.js'
+-
+  type: div
+  attribute: 
+    class: row
+  innerHTML: 
+    -
+      type: div
+      attribute: 
+        class: col-md-12
+      innerHTML:
+        -
+          type: widget
+          data:
+            plugin: wf/table
+            method: render_many
+            data:
+              id: dt_error_list
+              class:
+                table: table-sm table-striped
+              row:
+                cursor: pointer
+              field:
+                created_at: Created at
+                HTTP_HOST: HTTP_HOST
+                HTTP_USER_AGENT:
+                  text: HTTP_USER_AGENT
+                  visible: false
+                SERVER_NAME:
+                  text: SERVER_NAME
+                  visible: false
+                SERVER_ADDR: 
+                  text: SERVER_ADDR
+                  visible: false
+                DOCUMENT_ROOT:
+                  text: DOCUMENT_ROOT
+                  visible: false
+                REDIRECT_QUERY_STRING:
+                  text: REDIRECT_QUERY_STRING
+                  visible: false
+                REDIRECT_URL:
+                  text: REDIRECT_URL
+                  visible: false
+                REQUEST_METHOD:
+                  text: REQUEST_METHOD
+                  visible: false
+                QUERY_STRING:
+                  text: QUERY_STRING
+                  visible: false
+                session_id:
+                  text: session_id
+                  visible: false
+                error_message:
+                  text: error_message
+                  visible: false
+                error_file:
+                  text: error_file
+                  visible: false
+                error_line:
+                  text: error_line
+                  visible: true
+                error_type: error_type
+                HTTP_REFERER:
+                  text: HTTP_REFERER
+                  visible: false
+                session:
+                  text: session
+                  visible: false
+                phpversion: phpversion
+                REQUEST_URI: REQUEST_URI
+              datatable:
+                ajax: /admin/list_data
+                order:
+                  -
+                    - 0
+                    - desc
+        -
+          type: script
+          innerHTML: |
+            $('#dt_error_list tbody').on( 'click', 'tr', function () {
+                PluginErrorAdmin.data.log = datatable_dt_error_list.row( this ).data();
+                PluginJsonBind.bind();
+                $('#modal_data').modal('show');
+            } );
+-
+  type: widget
+  data:
+    plugin: bootstrap/modal
+    method: modal
+    data:
+      id: modal_data
+      title: Task
+      body:
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: Created at
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.created_at
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: HTTP_HOST
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.HTTP_HOST
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: HTTP_USER_AGENT
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.HTTP_USER_AGENT
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: REQUEST_URI
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.REQUEST_URI
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: REQUEST_METHOD
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.REQUEST_METHOD
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: Error message
+            -
+              type: pre
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.error_message
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: Error file
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.error_file
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: Error line
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.error_line
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: Error type
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.error_type
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: HTTP_REFERER
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.HTTP_REFERER
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: Session
+            -
+              type: pre
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.session
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: PHP verson
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.phpversion
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: SERVER_NAME
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.SERVER_NAME
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: SERVER_ADDR
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.SERVER_ADDR
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: DOCUMENT_ROOT
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.DOCUMENT_ROOT
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: REDIRECT_QUERY_STRING
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.REDIRECT_QUERY_STRING
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: REDIRECT_URL
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.REDIRECT_URL
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: QUERY_STRING
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.QUERY_STRING
+        -
+          type: div
+          innerHTML:
+            -
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: session_id
+            -
+              type: span
+              attribute:
+                json-bind: PluginErrorAdmin.data.log.session_id

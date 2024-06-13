@@ -1,0 +1,69 @@
+db_list:
+  sql: |
+    SELECT 
+    created_at,
+    HTTP_HOST,
+    REQUEST_URI,
+    error_message,
+    error_file,
+    error_line,
+    error_type,
+    HTTP_REFERER,
+    session,
+    phpversion,
+    HTTP_USER_AGENT,
+    SERVER_NAME,
+    SERVER_ADDR,
+    DOCUMENT_ROOT,
+    REDIRECT_QUERY_STRING,
+    REDIRECT_URL,
+    REQUEST_METHOD,
+    QUERY_STRING,
+    session_id
+    FROM buto_se_db_1.errorlog_log 
+    where HTTP_HOST <> 'localhost'
+    and created_at > DATE_ADD(now(), INTERVAL -30 DAY)
+    order by created_at desc
+    ;
+  select:
+    - created_at
+    - HTTP_HOST
+    - REQUEST_URI
+    - error_message
+    - error_file
+    - error_line
+    - error_type
+    - HTTP_REFERER
+    - session
+    - phpversion
+    - HTTP_USER_AGENT
+    - SERVER_NAME
+    - SERVER_ADDR
+    - DOCUMENT_ROOT
+    - REDIRECT_QUERY_STRING
+    - REDIRECT_URL
+    - REQUEST_METHOD
+    - QUERY_STRING
+    - session_id
+db_chart_date:
+  sql: |
+    select 
+    left(log.created_at, 10) as error_date 
+    ,count(log.id) as error_count 
+    ,(
+      select count(id) 
+      from errorlog_log 
+      where HTTP_HOST<>'localhost'
+      and left(created_at, 10) = left(log.created_at, 10)
+      and error_type='E_ERROR'
+    ) as error_count_error
+    from errorlog_log as log
+    where log.HTTP_HOST<>'localhost'
+    and log.created_at > DATE_ADD(now(), INTERVAL -30 DAY)
+    group by error_date 
+    order by error_date asc;
+    ;
+  select:
+    - error_date
+    - error_count
+    - error_count_error

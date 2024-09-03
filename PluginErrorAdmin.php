@@ -27,9 +27,12 @@ class PluginErrorAdmin{
     $datasets->set('0/data', null);
     $datasets->set('1/label', 'Error');
     $datasets->set('1/data', null);
+    $datasets->set('2/label', 'Others');
+    $datasets->set('2/data', null);
     foreach($rs as $k => $v){
       $datasets->set('0/data/', array('x' => $v['error_date'], 'y' => $v['error_count']));
       $datasets->set('1/data/', array('x' => $v['error_date'], 'y' => $v['error_count_error']));
+      $datasets->set('2/data/', array('x' => $v['error_date'], 'y' => $v['error_count_others']));
     }
     $element->setByTag(array('data' => $datasets->get()));
     wfDocument::renderElement(array($element->get()));

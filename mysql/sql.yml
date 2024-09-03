@@ -63,6 +63,14 @@ db_chart_date:
       and left(created_at, 10) = left(log.created_at, 10)
       and error_type='E_ERROR'
     ) as error_count_error
+    ,(
+      select count(id) 
+      from errorlog_log 
+      where HTTP_HOST<>'localhost'
+      and left(created_at, 10) = left(log.created_at, 10)
+      and error_type<>'E_WARNING'
+      and error_type<>'E_ERROR'
+    ) as error_count_others
     from errorlog_log as log
     where log.HTTP_HOST<>'localhost'
     and log.created_at > DATE_ADD(now(), INTERVAL -30 DAY)
@@ -73,3 +81,4 @@ db_chart_date:
     - error_date
     - error_count
     - error_count_error
+    - error_count_others

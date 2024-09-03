@@ -79,6 +79,6 @@ db_chart_date:
     ;
   select:
     - error_date
-    - error_count
-    - error_count_error
-    - error_count_others
+    - error_warning
+    - error_error
+    - error_others

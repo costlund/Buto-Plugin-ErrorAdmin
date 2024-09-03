@@ -1,0 +1,20 @@
+type: widget
+data:
+  plugin: chart/chartjs_4_4_1
+  method: chart
+  data:
+
+    data:
+      id: my_chart_id
+    config:
+      type: bar
+      data:
+        datasets: rs:data
+      options:
+        responsive: true
+        maintainAspectRatio: false
+        scales:
+          x:
+            type: 'time'
+            time:
+              unit: day

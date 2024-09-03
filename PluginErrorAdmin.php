@@ -18,11 +18,20 @@ class PluginErrorAdmin{
   }
   public function widget_panel(){
     /**
-     * chart
+     * chartjs
      */
     $rs = $this->db_chart_date();
-    $element = new PluginWfYml(__DIR__.'/element/chart_date.yml');
-    $element->setByTag(array('dataProvider' => $rs));
+    $element = new PluginWfYml(__DIR__.'/element/chartjs.yml');
+    $datasets = new PluginWfArray();
+    $datasets->set('0/label', 'Warning');
+    $datasets->set('0/data', null);
+    $datasets->set('1/label', 'Error');
+    $datasets->set('1/data', null);
+    foreach($rs as $k => $v){
+      $datasets->set('0/data/', array('x' => $v['error_date'], 'y' => $v['error_count']));
+      $datasets->set('1/data/', array('x' => $v['error_date'], 'y' => $v['error_count_error']));
+    }
+    $element->setByTag(array('data' => $datasets->get()));
     wfDocument::renderElement(array($element->get()));
     /**
      * table

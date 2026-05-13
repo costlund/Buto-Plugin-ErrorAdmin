@@ -45,7 +45,7 @@
                   visible: false
                 SERVER_ADDR: 
                   text: SERVER_ADDR
-                  visible: false
+                  visible: true
                 DOCUMENT_ROOT:
                   text: DOCUMENT_ROOT
                   visible: false
@@ -104,6 +104,7 @@
     data:
       id: modal_data
       title: Task
+      size: xl
       body:
         -
           type: div

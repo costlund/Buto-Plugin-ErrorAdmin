@@ -1,5 +1,9 @@
-version: 1.1.0
+version: 1.1.1
 history:
+  1.1.1:
+    date: '2026-05-13'
+    title: 'SERVER_ADDR'
+    description: 'Show column SERVER_ADDR. Made modal size xl.'
   1.1.0:
     date: '2024-09-03'
     title: 'Chartjs'
